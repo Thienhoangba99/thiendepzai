@@ -11,24 +11,27 @@ namespace Sky_TNT.Controllers
 {
     public class HomeController : Controller
     {
-        private DataContext db = new DataContext();
+        private DataContext db = new DataContext(); //truy cập database thông qua Model trung gian DataContext trong thư mục Models
+                                                    //Em đã thử tìm cách để dùng interface tuy nhiên em đã thử nhiều cách nhưng nó vẫn váo lỗi error CS0525
+
         public ActionResult Index(string chao, int? page, string search)
         {
             var img = db.img.Include(i => i.Images_GroupImages);
             ViewBag.listimg = img.OrderByDescending(i => i.CountView).ToList();
-            if (DateTime.Now.Hour < 5)
+
+            if (DateTime.Now.Hour < 5)              //Nếu thời gian nằm trong khoản từ 0h đến 5h thì sẽ chào buổi tối
             {
                 ViewBag.chao = "Good Night !";
             }
-            else if (DateTime.Now.Hour < 11)
+            else if (DateTime.Now.Hour < 11)        //Nếu thời gian nằm trong khoản từ 5h đến 11h thì sẽ chào buổi sáng
             {
                 ViewBag.chao = "Good Morning !";
             }
-            else if (DateTime.Now.Hour < 18)
+            else if (DateTime.Now.Hour < 18)        //Nếu thời gian nằm trong khoản từ 11h đến 18h thì sẽ chào buổi chiều
             {
                 ViewBag.chao = "Good Afternoon !";
             }
-            else if (DateTime.Now.Hour < 24)
+            else if (DateTime.Now.Hour < 24)        //Nếu thời gian nằm trong khoản từ 18h đến 24h thì sẽ chào buổi tối
             {
                 ViewBag.chao = "Good Evening !";
             }

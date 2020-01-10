@@ -13,7 +13,9 @@ namespace Sky_TNT.Controllers
 {
     public class ImagesController : Controller
     {
-        private DataContext db = new DataContext();
+        private DataContext db = new DataContext(); //truy cập database thông qua Model trung gian DataContext trong thư mục Models
+                                                    //Em đã thử tìm cách để dùng interface tuy nhiên em đã thử nhiều cách nhưng nó vẫn váo lỗi error CS0525
+
 
         [HttpPost]
         public bool UpdateCount(int c)
